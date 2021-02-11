@@ -1,12 +1,13 @@
 number = int(input('Введите число: '))
 
 
-def recursion(number):
+def loop(number):
+    answer = 1
 
-    if number == 1:
-        return number
-    else:
-        return number*recursion(number-1)
+    for i in range(1, number+1):
+        answer *= i
+
+    return answer
 
 
-print(recursion(number))
+print(loop(number))
