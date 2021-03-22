@@ -1,21 +1,20 @@
 from main import loop
 import unittest
 from unittest.mock import Mock
-import random
 
-mock = Mock()
-mock.return_value = random.randint(1, 100)
-mock.side_effect = lambda: "Был вызван мок!"
 
-print(loop(mock.return_value))
-print(mock())
+class InputHandler(unittest.TestCase):
 
-# class InputHandler(unittest.TestCase):
-#
-#     def setUp(self):
-#         self.mock = Mock()
-#         self.mock.return_value = random.randint(1, 100)
-#         self.mock.side_effect = lambda: "Был вызван мок!"
-#
-#     def test_loop(self):
-#         return loop(self.mock.return_value), self.mock()
+    def setUp(self):
+        self.mock = Mock()
+        self.mock.return_value = [5, 10, 20, 30, 50]
+        self.waiting = [120, 3628800, 2432902008176640000, 265252859812191058636308480000000,
+                   30414093201713378043612608166064768844377641568960512000000000000]
+        self.mock.side_effect = lambda n: f"Был вызван мок номер {n}!"
+
+    def test_loop(self):
+        for n in range(0, 5):
+            a = loop(self.mock.return_value[n])
+            b = self.waiting[n]
+            self.assertEqual(a, b)
+            print(self.mock.side_effect(n + 1))

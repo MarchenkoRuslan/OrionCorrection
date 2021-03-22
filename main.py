@@ -1,6 +1,3 @@
-number = int(input('Введите число: '))
-
-
 def loop(number):
     answer = 1
 
@@ -10,4 +7,6 @@ def loop(number):
     return answer
 
 
-print(loop(number))
+if __name__ == "__main__":
+    number = int(input('Введите число: '))
+    print(loop(number))
